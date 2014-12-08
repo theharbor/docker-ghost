@@ -1,0 +1,11 @@
+---
+
+- hosts: local
+  tasks:
+    - name: Install config.js
+      template:
+        src: ghost/config.js.j2
+        dest: /ghost/config.js
+        owner: ghost
+        group: ghost
+        mode: "0600"

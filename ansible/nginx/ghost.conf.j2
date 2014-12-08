@@ -1,0 +1,22 @@
+server {
+	listen 80;
+	server_name {{ ENV.GHOST_SERVERNAME }};
+
+	location / {
+		proxy_pass http://localhost:2368/;
+		include proxy_params;
+	}
+}
+{% if ENV.GHOST_USE_HTTPS|default(False) in ("yes", "Yes", "True", True, 1, "1") %}
+server {
+	listen 443 ssl;
+	server_name {{ ENV.GHOST_SERVERNAME }};
+	ssl_certificate {{ ENV.GHOST_TLS_CERTIFICATE }};
+	ssl_certificate_key {{ ENV.GHOST_TLS_CERTIFICATE_KEY }};
+
+	location / {
+		proxy_pass http://localhost:2368/;
+		include proxy_params;
+	}
+}
+{% endif %}
