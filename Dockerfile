@@ -1,4 +1,4 @@
-FROM harbor/base
+FROM harbor/base:legacy
 MAINTAINER Nick Groenen
 
 ENV NODE_ENV production
